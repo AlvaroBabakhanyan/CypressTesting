@@ -3,7 +3,7 @@ context('Filter', () => {
     beforeEach(() => {
         cy.visit('https://www.redfin.com/city/11203/CA/Los-Angeles')
     })
-     
+    
     it('Filter by price: valid range', () => {
         //set a price range
         cy.get('div[class="CustomFilter__dropdown align-center clickable"]').get('div[aria-label="Price"]').click()
@@ -27,7 +27,7 @@ context('Filter', () => {
         //check if redirected correctly
         cy.url().should('equal', 'https://www.redfin.com/city/11203/CA/Los-Angeles/filter/min-price=500M')
         //check that there are no homes with in this range
-        cy.get('h2[class="heading-medium inline-block noResultTitle"]').invoke('text').should('eq', 'No results')
+        cy.get('div[data-rf-test-id="no-results-view"]').find('h2').invoke('text').should('eq', 'No results')
     }) 
 
     it('Filter by price: string input', () => {
