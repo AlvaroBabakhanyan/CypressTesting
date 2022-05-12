@@ -6,10 +6,10 @@ context('Filter', () => {
     
     it('Filter by price: valid range', () => {
         //set a price range
-        cy.get('div[class="CustomFilter__dropdown align-center clickable"]').get('div[aria-label="Price"]').click()
-        cy.get('div[class="SearchFormSection__container"]').get('input[placeholder="Enter min"]').type(100000)
-        cy.get('div[class="SearchFormSection__container"]').get('input[placeholder="Enter max"]').type(999999)
-        cy.get('div[class="SearchFormSection__container"]').get('button[class="button Button primary"]').click()
+        cy.get('div[aria-label="Price"]').click()
+        cy.get('input[placeholder="Enter min"]').type(100000)
+        cy.get('input[placeholder="Enter max"]').type(999999)
+        cy.get('button[class="button Button primary"]').click()
         //check if redirected correctly
         cy.url().should('equal', 'https://www.redfin.com/city/11203/CA/Los-Angeles/filter/min-price=100k,max-price=1000k')
         //check that all homecards in the first page are in the specified price range
@@ -21,9 +21,9 @@ context('Filter', () => {
 
     it('Filter by price: too big min', () => {
         //set a price range
-        cy.get('div[class="CustomFilter__dropdown align-center clickable"]').get('div[aria-label="Price"]').click()
-        cy.get('div[class="SearchFormSection__container"]').get('input[placeholder="Enter min"]').type(500000000)
-        cy.get('div[class="SearchFormSection__container"]').get('button[class="button Button primary"]').click()
+        cy.get('div[aria-label="Price"]').click()
+        cy.get('input[placeholder="Enter min"]').type(500000000)
+        cy.get('button[class="button Button primary"]').click()
         //check if redirected correctly
         cy.url().should('equal', 'https://www.redfin.com/city/11203/CA/Los-Angeles/filter/min-price=500M')
         //check that there are no homes with in this range
@@ -32,10 +32,10 @@ context('Filter', () => {
 
     it('Filter by price: string input', () => {
         //set an invalid price range
-        cy.get('div[class="CustomFilter__dropdown align-center clickable"]').get('div[aria-label="Price"]').click()
-        cy.get('div[class="SearchFormSection__container"]').get('input[placeholder="Enter min"]').type("ttttt")
-        cy.get('div[class="SearchFormSection__container"]').get('input[placeholder="Enter max"]').type("ccccc")
-        cy.get('div[class="SearchFormSection__container"]').get('button[class="button Button primary"]').click()
+        cy.get('div[aria-label="Price"]').click()
+        cy.get('input[placeholder="Enter min"]').type("ttttt")
+        cy.get('input[placeholder="Enter max"]').type("ccccc")
+        cy.get('button[class="button Button primary"]').click()
 
         //check that no changes were made after an invalid input
         cy.url().should('equal', 'https://www.redfin.com/city/11203/CA/Los-Angeles')
